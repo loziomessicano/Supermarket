@@ -5,6 +5,12 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
@@ -31,11 +37,45 @@ public class User {
 
 	String prov;
 
+	@JsonIgnore
+	@OneToMany
+	@JoinColumn(name="User_id")
 	List<CartaDiCredito> listaCarte;
 
+	
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+    	      name="USER_PROD_CDT",
+    	      joinColumns=@JoinColumn(name="PROD_ID", referencedColumnName="ID"),
+    	      inverseJoinColumns= {@JoinColumn(name="USER_ID", referencedColumnName="ID"), @JoinColumn(name="COD",referencedColumnName="COD")})
+	List<Prodotto> listaProdotti;
+    	
+	
 	public User() {
 
 	}
+	
+
+	public List<CartaDiCredito> getListaCarte() {
+		return listaCarte;
+	}
+
+
+	public void setListaCarte(List<CartaDiCredito> listaCarte) {
+		this.listaCarte = listaCarte;
+	}
+
+
+	public List<Prodotto> getListaProdotti() {
+		return listaProdotti;
+	}
+
+
+	public void setListaProdotti(List<Prodotto> listaProdotti) {
+		this.listaProdotti = listaProdotti;
+	}
+
 
 	public int getId() {
 		return id;
@@ -125,11 +165,13 @@ public class User {
 		this.listaCarte = listaCarte;
 	}
 
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", tipo="
 				+ tipo + ", tel=" + tel + ", via=" + via + ", cap=" + cap + ", citta=" + citta + ", prov=" + prov
-				+ ", listaCarte=" + listaCarte + "]";
+				+ ", listaCarte=" + listaCarte + ", listaProdotti=" + listaProdotti + "]";
 	}
 
+	
 }

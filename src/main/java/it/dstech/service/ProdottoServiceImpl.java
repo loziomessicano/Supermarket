@@ -35,6 +35,11 @@ public class ProdottoServiceImpl implements ProdottoService{
 	public List<Prodotto> findByQuantitaDisponibile(Double quantitaDisponibile) {
 		return prodottoRepository.findByQuantitaDisponibile(quantitaDisponibile);
 	}
+
+	@Override
+	public Prodotto findById(int id) {
+		return prodottoRepository.findById(id);
+	}
 	
 	
 

@@ -23,13 +23,13 @@ import it.dstech.service.UserService;
 @RestController
 @RequestMapping("/cartadicredito")
 public class CartaDiCreditoController {
-	
+
 	@Autowired
 	CartaDiCreditoService cartaService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@GetMapping("/getmodel")
@@ -37,22 +37,22 @@ public class CartaDiCreditoController {
 		CartaDiCredito carta = new CartaDiCredito();
 		return new ResponseEntity<CartaDiCredito>(carta, HttpStatus.CREATED);
 	}
-	
+
 	@PostMapping("/save")
-	public ResponseEntity<CartaDiCredito> save(@RequestBody CartaDiCredito carta, @RequestBody String numero, @RequestBody String ccv) {
+	public ResponseEntity<CartaDiCredito> save(@RequestBody CartaDiCredito carta, @RequestBody String numero,
+			@RequestBody String ccv) {
 		try {
-			
+
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findByUsername(auth.getName());	
+			User user = userService.findByUsername(auth.getName());
 			byte[] encodedBytes = Base64.getEncoder().encode(numero.getBytes());
 			logger.info("encodedBytes " + new String(encodedBytes));
-			String encoded = new String (encodedBytes);
+			String encoded = new String(encodedBytes);
 			carta.setNumero(encoded);
 			CartaDiCredito saved = cartaService.save(carta);
 			user.getCartaCredito().add(saved);
 			userService.saveUser(user);
 			logger.info(saved + " saved");
-			
 
 			return new ResponseEntity<CartaDiCredito>(saved, HttpStatus.CREATED);
 		} catch (Exception e) {
