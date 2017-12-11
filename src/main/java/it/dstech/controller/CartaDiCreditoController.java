@@ -1,5 +1,7 @@
 package it.dstech.controller;
 
+import java.util.Base64;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,11 +43,17 @@ public class CartaDiCreditoController {
 		try {
 			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findByUsername(auth.getName());			
+			User user = userService.findByUsername(auth.getName());	
+			byte[] encodedBytes = Base64.getEncoder().encode("Test".getBytes());
+			logger.info("encodedBytes " + new String(encodedBytes));
+			String encoded = new String (encodedBytes);
+			carta.setNumero(encoded);
 			CartaDiCredito saved = cartaService.save(carta);
 			user.getCartaCredito().add(saved);
 			userService.saveUser(user);
 			logger.info(saved + " saved");
+			
+
 			return new ResponseEntity<CartaDiCredito>(saved, HttpStatus.CREATED);
 		} catch (Exception e) {
 			logger.error("Errore " + e);
