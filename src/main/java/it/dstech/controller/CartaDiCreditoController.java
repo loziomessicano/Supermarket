@@ -43,7 +43,7 @@ public class CartaDiCreditoController {
 		try {
 			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findByUsername(auth.getName());	
+			User user = userService.findByUsername(auth.getName());
 			byte[] encodedBytes = Base64.getEncoder().encode("Test".getBytes());
 			logger.info("encodedBytes " + new String(encodedBytes));
 			String encoded = new String (encodedBytes);

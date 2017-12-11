@@ -55,6 +55,27 @@ public class User {
 	public User() {
 
 	}
+	
+
+	public List<CartaDiCredito> getListaCarte() {
+		return listaCarte;
+	}
+
+
+	public void setListaCarte(List<CartaDiCredito> listaCarte) {
+		this.listaCarte = listaCarte;
+	}
+
+
+	public List<Prodotto> getListaProdotti() {
+		return listaProdotti;
+	}
+
+
+	public void setListaProdotti(List<Prodotto> listaProdotti) {
+		this.listaProdotti = listaProdotti;
+	}
+
 
 	public int getId() {
 		return id;
@@ -144,11 +165,13 @@ public class User {
 		this.listaCarte = listaCarte;
 	}
 
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", tipo="
 				+ tipo + ", tel=" + tel + ", via=" + via + ", cap=" + cap + ", citta=" + citta + ", prov=" + prov
-				+ ", listaCarte=" + listaCarte + "]";
+				+ ", listaCarte=" + listaCarte + ", listaProdotti=" + listaProdotti + "]";
 	}
 
+	
 }
