@@ -39,12 +39,12 @@ public class CartaDiCreditoController {
 	}
 	
 	@PostMapping("/save")
-	public ResponseEntity<CartaDiCredito> save(@RequestBody CartaDiCredito carta) {
+	public ResponseEntity<CartaDiCredito> save(@RequestBody CartaDiCredito carta, @RequestBody String numero, @RequestBody String ccv) {
 		try {
 			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByUsername(auth.getName());	
-			byte[] encodedBytes = Base64.getEncoder().encode("Test".getBytes());
+			byte[] encodedBytes = Base64.getEncoder().encode(numero.getBytes());
 			logger.info("encodedBytes " + new String(encodedBytes));
 			String encoded = new String (encodedBytes);
 			carta.setNumero(encoded);
