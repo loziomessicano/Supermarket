@@ -26,6 +26,8 @@ public class Prodotto {
 	private int offerta;
 	
 	
+	
+	
 	public int getId() {
 		return id;
 	}
