@@ -18,4 +18,9 @@ public class CartaDiCreditoServiceImpl implements CartaDiCreditoService {
 		return cartaRepo.save(carta);
 	}
 
+	@Override
+	public CartaDiCredito findById(int id) {
+		return cartaRepo.findById(id);
+	}
+
 }

@@ -27,12 +27,12 @@ public class Prodotto {
 	private String img;
 	private int offerta;
 
-	@ManyToMany(mappedBy="listaProdotti")
+	@ManyToMany(mappedBy = "listaProdotti")
 	private List<User> listaUtenti;
 
-	@ManyToMany(mappedBy="listaProdotti")
+	@ManyToMany(mappedBy = "listaProdotti")
 	private int numeroTransazione;
-	
+
 	public List<User> getListaUtenti() {
 		return listaUtenti;
 	}
@@ -162,7 +162,5 @@ public class Prodotto {
 				+ img + ", offerta=" + offerta + ", listaUtenti=" + listaUtenti + ", numeroTransazione="
 				+ numeroTransazione + "]";
 	}
-
-
 
 }
