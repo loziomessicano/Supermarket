@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.dstech.model.CartaDiCredito;
+import it.dstech.model.User;
 import it.dstech.service.CartaDiCreditoService;
+import it.dstech.service.UserService;
 
 @RestController
 @RequestMapping("/cartadicredito")
@@ -41,7 +43,7 @@ public class CartaDiCreditoController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByUsername(auth.getName());			
 			CartaDiCredito saved = cartaService.save(carta);
-			user.getListCard().add(saved);
+			user.getCartaCredito().add(saved);
 			userService.saveUser(user);
 			logger.info(saved + " saved");
 			return new ResponseEntity<CartaDiCredito>(saved, HttpStatus.CREATED);

@@ -31,10 +31,10 @@ public class User {
 
 	String prov;
 
-	List<CartaCredito> cartaCredito;
+	List<CartaDiCredito> listaCarte;
 
 	public User() {
-		
+
 	}
 
 	public int getId() {
@@ -117,19 +117,19 @@ public class User {
 		this.prov = prov;
 	}
 
-	public List<CartaCredito> getCartaCredito() {
-		return cartaCredito;
+	public List<CartaDiCredito> getCartaCredito() {
+		return listaCarte;
 	}
 
-	public void setCartaCredito(List<CartaCredito> cartaCredito) {
-		this.cartaCredito = cartaCredito;
+	public void setCartaCredito(List<CartaDiCredito> listaCarte) {
+		this.listaCarte = listaCarte;
 	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", password=" + password + ", tel=" + tel + ", via=" + via
-				+ ", cap=" + cap + ", citta=" + citta + ", prov=" + prov + "]";
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", tipo="
+				+ tipo + ", tel=" + tel + ", via=" + via + ", cap=" + cap + ", citta=" + citta + ", prov=" + prov
+				+ ", listaCarte=" + listaCarte + "]";
 	}
 
-	
 }

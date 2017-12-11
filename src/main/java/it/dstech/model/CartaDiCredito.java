@@ -8,31 +8,23 @@ import javax.persistence.Id;
 
 @Entity
 public class CartaDiCredito {
-	
+
 	@GeneratedValue
 	@Id
 	private int id;
-	
-	private String numero ;
-	
-	private LocalDate scadenza ;
-	
-	private String ccv ;
-	
-	private double credito ;
-	
-	private User user ;
-	
-	
 
-	public CartaDiCredito(int id, String numero, LocalDate scadenza, String ccv, double credito, User user) {
-		super();
-		this.id = id;
-		this.numero = numero;
-		this.scadenza = scadenza;
-		this.ccv = ccv;
-		this.credito = credito;
-		this.user = user;
+	private String numero;
+
+	private LocalDate scadenza;
+
+	private String ccv;
+
+	private double credito;
+
+	private User user;
+
+	public CartaDiCredito() {
+
 	}
 
 	public int getId() {
@@ -88,8 +80,5 @@ public class CartaDiCredito {
 		return "CartaDiCredito [id=" + id + ", numero=" + numero + ", scadenza=" + scadenza + ", ccv=" + ccv
 				+ ", credito=" + credito + "]";
 	}
-	
-	
-	
 
 }
