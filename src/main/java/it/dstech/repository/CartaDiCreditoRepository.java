@@ -6,6 +6,6 @@ import it.dstech.model.CartaDiCredito;
 
 public interface CartaDiCreditoRepository extends CrudRepository <CartaDiCredito,Integer> {
 	
-	
+	CartaDiCredito findById(int id);
 
 }
