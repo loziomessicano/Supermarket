@@ -1,6 +1,7 @@
 package it.dstech.controller;
 
 import java.util.Base64;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +59,38 @@ public class CartaDiCreditoController {
 			return new ResponseEntity<CartaDiCredito>(saved, HttpStatus.CREATED);
 		} catch (Exception e) {
 			logger.error("Errore " + e);
+			return new ResponseEntity<CartaDiCredito>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/findByUserId/{id}")
+	public ResponseEntity<List<CartaDiCredito>> findByUserId(@PathVariable int id) {
+		try {
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User user = userService.findByUsername(auth.getName());
+			List<CartaDiCredito> find = (List<CartaDiCredito>) cartaService.findByUserId(id);
+			logger.info(find + " founded");
+			if(find!=null)
+			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.OK);
+			else
+			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			logger.error("Errore  " + e);
+			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@GetMapping("/findById/{id}")
+	public ResponseEntity<CartaDiCredito> findById(@PathVariable int id) {
+		try {
+			CartaDiCredito find = cartaService.findById(id);
+			logger.info(find + " founded");
+			if(find!=null)
+			return new ResponseEntity<CartaDiCredito>(HttpStatus.OK);
+			else
+			return new ResponseEntity<CartaDiCredito>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			logger.error("Errore  " + e);
 			return new ResponseEntity<CartaDiCredito>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

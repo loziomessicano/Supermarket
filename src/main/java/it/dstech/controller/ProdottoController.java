@@ -63,10 +63,10 @@ public class ProdottoController {
 	}
 	
 	@PostMapping("/addprodotto/{prodottoid}/{carta}")
-	public ResponseEntity<User> addProdotto(@PathVariable("prodottoid") int idCell,@PathVariable("carta") int idCarta) {
+	public ResponseEntity<User> addProdotto(@PathVariable("prodottoid") int id,@PathVariable("carta") int idCarta) {
 		try {
 			CartaDiCredito card = cartaDiCreditoService.findById(idCarta);
-			Prodotto prodotto = prodottoService.findById(idCell);
+			Prodotto prodotto = prodottoService.findById(id);
 			LocalDate dNow = LocalDate.now();
 		    logger.info("anno" + dNow);
 		    //-----
@@ -80,7 +80,7 @@ public class ProdottoController {
 			if(prodotto.getQuantitaDisponibile()>0 && dNow.isBefore(scadenza) && card.getCredito() >= prodotto.getPrezzoIvato()) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByUsername(auth.getName());			
-			user.getListaProdotti().add(prodottoService.findById(idCell));
+			user.getListaProdotti().add(prodottoService.findById(id));
 			userService.saveUser(user);
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-1);
 			prodottoService.saveOrUpdateProdotto(prodotto);
