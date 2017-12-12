@@ -31,7 +31,7 @@ public class Prodotto {
 	private List<User> listaUtenti;
 
 	@ManyToMany(mappedBy = "listaProdotti")
-	private int numeroTransazione;
+	private List<Long>numeroTransazione;
 
 	public List<User> getListaUtenti() {
 		return listaUtenti;
@@ -41,11 +41,12 @@ public class Prodotto {
 		this.listaUtenti = listaUtenti;
 	}
 
-	public int getNumeroTransazione() {
+	
+	public List<Long> getNumeroTransazione() {
 		return numeroTransazione;
 	}
 
-	public void setNumeroTransazione(int numeroTransazione) {
+	public void setNumeroTransazione(List<Long> numeroTransazione) {
 		this.numeroTransazione = numeroTransazione;
 	}
 

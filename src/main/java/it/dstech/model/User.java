@@ -46,9 +46,9 @@ public class User {
     @JsonIgnore
     @ManyToMany
     @JoinTable(
-    	      name="USER_PROD_CDT",
-    	      joinColumns=@JoinColumn(name="PROD_ID", referencedColumnName="ID"),
-    	      inverseJoinColumns= {@JoinColumn(name="USER_ID", referencedColumnName="ID"), @JoinColumn(name="COD",referencedColumnName="COD")})
+    	      name="USER_PROD",
+    	      joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
+    	      inverseJoinColumns= {@JoinColumn(name="PROD_ID", referencedColumnName="ID"), @JoinColumn(name="PROD_numeroTransazione",referencedColumnName="numeroTransazione")})
 	List<Prodotto> listaProdotti;
     	
 	
