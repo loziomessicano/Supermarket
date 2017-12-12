@@ -23,8 +23,8 @@ public class CartaDiCredito {
 
 	private double credito;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	private User user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	private User userC;
 
 	public CartaDiCredito() {
 
@@ -70,18 +70,18 @@ public class CartaDiCredito {
 		this.credito = credito;
 	}
 
-	public User getUser() {
-		return user;
+	public User getUserC() {
+		return userC;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserC(User userC) {
+		this.userC = userC;
 	}
 
 	@Override
 	public String toString() {
 		return "CartaDiCredito [id=" + id + ", numero=" + numero + ", scadenza=" + scadenza + ", ccv=" + ccv
-				+ ", credito=" + credito + "]";
+				+ ", credito=" + credito + ", userC=" + userC + "]";
 	}
 
 }
