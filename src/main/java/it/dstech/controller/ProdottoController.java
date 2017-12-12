@@ -80,7 +80,7 @@ public class ProdottoController {
 			if(prodotto.getQuantitaDisponibile()>0 && dNow.isBefore(scadenza) && card.getCredito() >= prodotto.getPrezzoIvato()) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByUsername(auth.getName());			
-			user.getListaProdotti().add(prodottoService.findById(id));
+			user.getListaOrdini().add(prodottoService.findById(id));
 			userService.saveUser(user);
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-1);
 			prodottoService.saveOrUpdateProdotto(prodotto);

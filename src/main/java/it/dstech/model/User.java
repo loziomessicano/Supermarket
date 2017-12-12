@@ -121,6 +121,15 @@ public class User {
 		this.cap = cap;
 	}
 
+	
+	public List<Ordine> getListaOrdini() {
+		return listaOrdini;
+	}
+
+	public void setListaOrdini(List<Ordine> listaOrdini) {
+		this.listaOrdini = listaOrdini;
+	}
+
 	public String getCitta() {
 		return citta;
 	}
