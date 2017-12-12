@@ -9,9 +9,11 @@ public interface ProdottoService {
 	
 	List<Prodotto> findAll();
 	
-	Prodotto saveOrUpdateProdotto(Prodotto prodotto);
+	Prodotto saveOrUpdate(Prodotto prodotto);
 	
 	Prodotto findById(int id);
+	
+	void delete(int id);
 	
 	public List<Prodotto> findByCategoria(Categoria categoria);
 	
