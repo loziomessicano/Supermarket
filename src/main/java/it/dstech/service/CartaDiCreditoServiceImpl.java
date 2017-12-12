@@ -28,7 +28,7 @@ public class CartaDiCreditoServiceImpl implements CartaDiCreditoService {
 	@Override
 	public List<CartaDiCredito> findByUserId(int id) {
 		
-		return (List<CartaDiCredito>) cartaRepo.findByUserId(id);
+		return (List<CartaDiCredito>) cartaRepo.findByUserC_Id(id);
 	}
 
 }

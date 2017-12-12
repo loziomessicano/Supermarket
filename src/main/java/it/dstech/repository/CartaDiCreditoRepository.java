@@ -10,6 +10,5 @@ public interface CartaDiCreditoRepository extends CrudRepository <CartaDiCredito
 	
 	CartaDiCredito findById(int id);
 	
-	List<CartaDiCredito> findByUserId(int id);
-
+    List<CartaDiCredito> findByUserC_Id(int id);
 }

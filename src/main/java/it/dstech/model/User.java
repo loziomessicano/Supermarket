@@ -42,7 +42,7 @@ public class User {
 	List<CartaDiCredito> listaCarte;
 
 	@JsonIgnore
-	@OneToMany(mappedBy = "userO")
+	@OneToMany(mappedBy = "user")
 	List<Ordine> listaOrdini;
 
 	public User() {

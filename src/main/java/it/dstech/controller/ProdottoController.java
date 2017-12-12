@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.dstech.model.CartaDiCredito;
 import it.dstech.model.Categoria;
+import it.dstech.model.Ordine;
 import it.dstech.model.Prodotto;
 import it.dstech.model.User;
 import it.dstech.service.CartaDiCreditoService;
@@ -49,7 +50,6 @@ public class ProdottoController {
 	private UserService userService;
 	
 	
-	
 	@GetMapping("/getall")
 	public ResponseEntity<List<Prodotto>> getAll() {
 		try {
@@ -67,6 +67,7 @@ public class ProdottoController {
 		try {
 			CartaDiCredito card = cartaDiCreditoService.findById(idCarta);
 			Prodotto prodotto = prodottoService.findById(id);
+			Ordine ordine=new Ordine(); //da rivedere
 			LocalDate dNow = LocalDate.now();
 		    logger.info("anno" + dNow);
 		    //-----
@@ -79,8 +80,9 @@ public class ProdottoController {
 		    logger.info("prova" + dNow.isBefore(scadenza));
 			if(prodotto.getQuantitaDisponibile()>0 && dNow.isBefore(scadenza) && card.getCredito() >= prodotto.getPrezzoIvato()) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findByUsername(auth.getName());			
-			user.getListaOrdini().add(prodottoService.findById(id));
+			User user = userService.findByUsername(auth.getName());	
+			ordine.getListaProdotti().add(prodottoService.findById(id));
+			//user.getListaProdotti().add(prodottoService.findById(id)); da rivedere comando sopra
 			userService.saveUser(user);
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-1);
 			prodottoService.saveOrUpdateProdotto(prodotto);

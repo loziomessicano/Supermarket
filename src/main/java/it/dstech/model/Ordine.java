@@ -24,7 +24,7 @@ public class Ordine {
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
-	User userO;
+	User user;
 	
 	@JsonIgnore
 	 @ManyToMany
@@ -46,12 +46,12 @@ public class Ordine {
 		this.numeroTransazione = numeroTransazione;
 	}
 
-	public User getUserO() {
-		return userO;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserO(User userO) {
-		this.userO = userO;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<Prodotto> getListaProdotti() {
@@ -64,7 +64,7 @@ public class Ordine {
 
 	@Override
 	public String toString() {
-		return "Ordine [numeroTransazione=" + numeroTransazione + ", userO=" + userO + ", listaProdotti="
+		return "Ordine [numeroTransazione=" + numeroTransazione + ", user=" + user + ", listaProdotti="
 				+ listaProdotti + "]";
 	}
 
