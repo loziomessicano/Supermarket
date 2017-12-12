@@ -38,44 +38,24 @@ public class User {
 	String prov;
 
 	@JsonIgnore
-	@OneToMany
-	@JoinColumn(name="User_id")
+	@OneToMany(mappedBy= "userC")
 	List<CartaDiCredito> listaCarte;
 
-	
-    @JsonIgnore
-    @ManyToMany
-    @JoinTable(
-    	      name="USER_PROD",
-    	      joinColumns=@JoinColumn(name="USER_ID", referencedColumnName="ID"),
-    	      inverseJoinColumns= {@JoinColumn(name="PROD_ID", referencedColumnName="ID"), @JoinColumn(name="PROD_numeroTransazione",referencedColumnName="numeroTransazione")})
-	List<Prodotto> listaProdotti;
-    	
-	
+	@JsonIgnore
+	@OneToMany(mappedBy = "userO")
+	List<Ordine> listaOrdini;
+
 	public User() {
 
 	}
-	
 
 	public List<CartaDiCredito> getListaCarte() {
 		return listaCarte;
 	}
 
-
 	public void setListaCarte(List<CartaDiCredito> listaCarte) {
 		this.listaCarte = listaCarte;
 	}
-
-
-	public List<Prodotto> getListaProdotti() {
-		return listaProdotti;
-	}
-
-
-	public void setListaProdotti(List<Prodotto> listaProdotti) {
-		this.listaProdotti = listaProdotti;
-	}
-
 
 	public int getId() {
 		return id;
@@ -165,13 +145,11 @@ public class User {
 		this.listaCarte = listaCarte;
 	}
 
-
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", role=" + role + ", tipo="
-				+ tipo + ", tel=" + tel + ", via=" + via + ", cap=" + cap + ", citta=" + citta + ", prov=" + prov
-				+ ", listaCarte=" + listaCarte + ", listaProdotti=" + listaProdotti + "]";
+				+ tipo + ", tel=" + tel + ", via=" + via + ", cap=" + cap + ", citFta=" + citta + ", prov=" + prov
+				+ ", listaCarte=" + listaCarte + ", listaOrdini=" + listaOrdini + "]";
 	}
 
-	
 }

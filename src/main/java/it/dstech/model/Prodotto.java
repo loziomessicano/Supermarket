@@ -26,28 +26,12 @@ public class Prodotto {
 	private Double prezzoIvato;
 	private String img;
 	private int offerta;
-
-	@ManyToMany(mappedBy = "listaProdotti")
-	private List<User> listaUtenti;
-
-	@ManyToMany(mappedBy = "listaProdotti")
-	private List<Long>numeroTransazione;
-
-	public List<User> getListaUtenti() {
-		return listaUtenti;
-	}
-
-	public void setListaUtenti(List<User> listaUtenti) {
-		this.listaUtenti = listaUtenti;
-	}
-
 	
-	public List<Long> getNumeroTransazione() {
-		return numeroTransazione;
-	}
+	@ManyToMany(mappedBy="listaProdotti")
+	private List<Ordine> listaOrdini;
 
-	public void setNumeroTransazione(List<Long> numeroTransazione) {
-		this.numeroTransazione = numeroTransazione;
+	public Prodotto() {
+
 	}
 
 	public int getId() {
@@ -154,14 +138,22 @@ public class Prodotto {
 		this.offerta = offerta;
 	}
 
+	public List<Ordine> getListaOrdini() {
+		return listaOrdini;
+	}
+
+	public void setListaOrdini(List<Ordine> listaOrdini) {
+		this.listaOrdini = listaOrdini;
+	}
+
 	@Override
 	public String toString() {
 		return "Prodotto [id=" + id + ", nome=" + nome + ", marca=" + marca + ", dataScadenza=" + dataScadenza
 				+ ", categoria=" + categoria + ", quantitaDisponibile=" + quantitaDisponibile
 				+ ", quantitaDaAcquistare=" + quantitaDaAcquistare + ", unita=" + unita + ", prezzoUnitario="
 				+ prezzoUnitario + ", prezzoSenzaIva=" + prezzoSenzaIva + ", prezzoIvato=" + prezzoIvato + ", img="
-				+ img + ", offerta=" + offerta + ", listaUtenti=" + listaUtenti + ", numeroTransazione="
-				+ numeroTransazione + "]";
+				+ img + ", offerta=" + offerta + ", listaOrdini=" + listaOrdini + "]";
 	}
 
+		
 }
