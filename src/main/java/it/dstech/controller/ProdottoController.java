@@ -13,9 +13,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -62,6 +64,18 @@ public class ProdottoController {
 		}
 	}
 	
+	@PostMapping("/saveOrUpdate")
+	public ResponseEntity<Prodotto> saveOrUpdate(@RequestBody Prodotto prodotto) {
+		try {
+			Prodotto saved = prodottoService.saveOrUpdate(prodotto);
+			logger.info(saved + " saved");
+			return new ResponseEntity<Prodotto>(saved, HttpStatus.CREATED);
+		} catch (Exception e) {
+			logger.error("Errore " + e);
+			return new ResponseEntity<Prodotto>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping("/addprodotto/{prodottoid}/{carta}")
 	public ResponseEntity<User> addProdotto(@PathVariable("prodottoid") int id,@PathVariable("carta") int idCarta) {
 		try {
@@ -85,7 +99,7 @@ public class ProdottoController {
 			//user.getListaProdotti().add(prodottoService.findById(id)); da rivedere comando sopra
 			userService.saveUser(user);
 			prodotto.setQuantitaDisponibile(prodotto.getQuantitaDisponibile()-1);
-			prodottoService.saveOrUpdateProdotto(prodotto);
+			prodottoService.saveOrUpdate(prodotto);
 			//------
 			double credito = card.getCredito();
 			card.setCredito(credito-prodotto.getPrezzoIvato());
@@ -128,6 +142,18 @@ public class ProdottoController {
 		} catch (Exception e) {
 			logger.error("Errore " + e);
 			return new ResponseEntity<List<Prodotto>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<Prodotto> delete(@PathVariable("id") int id) {
+		try {
+			prodottoService.delete(id);
+			logger.info(id + " deleted");
+			return new ResponseEntity<Prodotto>(HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Errore " + e);
+			return new ResponseEntity<Prodotto>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

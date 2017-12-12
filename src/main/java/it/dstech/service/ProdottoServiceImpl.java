@@ -22,7 +22,7 @@ public class ProdottoServiceImpl implements ProdottoService{
 	}
 
 	@Override
-	public Prodotto saveOrUpdateProdotto(Prodotto prodotto) {
+	public Prodotto saveOrUpdate(Prodotto prodotto) {
 		return prodottoRepository.save(prodotto);
 	}
 
@@ -39,6 +39,12 @@ public class ProdottoServiceImpl implements ProdottoService{
 	@Override
 	public Prodotto findById(int id) {
 		return prodottoRepository.findById(id);
+	}
+
+	@Override
+	public void delete(int id) {
+		prodottoRepository.delete(id);
+		
 	}
 	
 	
