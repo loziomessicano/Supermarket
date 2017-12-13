@@ -51,6 +51,12 @@ public class ProdottoController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping("/getmodel")
+	public ResponseEntity<Prodotto> getmodel() {
+		Prodotto prod = new Prodotto();
+		return new ResponseEntity<Prodotto>(prod, HttpStatus.CREATED);
+	}
+	
 	
 	@GetMapping("/getall")
 	public ResponseEntity<List<Prodotto>> getAll() {

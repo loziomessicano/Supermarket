@@ -43,7 +43,6 @@ public class AuthController {
 	@PostMapping("/register")
 	public User addUser(@RequestBody User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
-		user.setRole(RoleUser.ROLE_USER);
 		return userService.saveUser(user);
 	}
 	
