@@ -19,5 +19,4 @@ public interface ProdottoService {
 	
 	public List<Prodotto> findByQuantitaDisponibile(Double quantitaDisponibile);
 	
-
 }

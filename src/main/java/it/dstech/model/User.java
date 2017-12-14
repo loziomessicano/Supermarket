@@ -6,8 +6,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -38,7 +36,8 @@ public class User {
 	String prov;
 
 	@JsonIgnore
-	@OneToMany(mappedBy= "userC")
+	@OneToMany
+	@JoinColumn(name="User_id")
 	List<CartaDiCredito> listaCarte;
 
 	@JsonIgnore
@@ -144,14 +143,6 @@ public class User {
 
 	public void setProv(String prov) {
 		this.prov = prov;
-	}
-
-	public List<CartaDiCredito> getCartaCredito() {
-		return listaCarte;
-	}
-
-	public void setCartaCredito(List<CartaDiCredito> listaCarte) {
-		this.listaCarte = listaCarte;
 	}
 
 	@Override

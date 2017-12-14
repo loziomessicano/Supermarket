@@ -1,5 +1,6 @@
 package it.dstech.model;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -21,6 +22,8 @@ public class Ordine {
 	@Id
 	@Column(unique=true)
 	int numeroTransazione;
+	
+	LocalDate dataAcquisto;
 	
 	@JsonIgnore
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -54,6 +57,14 @@ public class Ordine {
 		this.user = user;
 	}
 
+	public LocalDate getDataAcquisto() {
+		return dataAcquisto;
+	}
+
+	public void setDataAcquisto(LocalDate dataAcquisto) {
+		this.dataAcquisto = dataAcquisto;
+	}
+
 	public List<Prodotto> getListaProdotti() {
 		return listaProdotti;
 	}
@@ -64,10 +75,9 @@ public class Ordine {
 
 	@Override
 	public String toString() {
-		return "Ordine [numeroTransazione=" + numeroTransazione + ", user=" + user + ", listaProdotti="
-				+ listaProdotti + "]";
+		return "Ordine [numeroTransazione=" + numeroTransazione + ", dataAcquisto=" + dataAcquisto + ", user=" + user
+				+ ", listaProdotti=" + listaProdotti + "]";
 	}
 
 	
-
 }

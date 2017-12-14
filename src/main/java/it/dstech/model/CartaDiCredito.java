@@ -1,12 +1,14 @@
 package it.dstech.model;
 
-import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class CartaDiCredito {
@@ -17,12 +19,13 @@ public class CartaDiCredito {
 
 	private String numero;
 
-	private LocalDate scadenza;
+	private String scadenza;
 
 	private String ccv;
 
 	private double credito;
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	private User userC;
 
@@ -46,11 +49,11 @@ public class CartaDiCredito {
 		this.numero = numero;
 	}
 
-	public LocalDate getScadenza() {
+	public String getScadenza() {
 		return scadenza;
 	}
 
-	public void setScadenza(LocalDate scadenza) {
+	public void setScadenza(String scadenza) {
 		this.scadenza = scadenza;
 	}
 
@@ -84,4 +87,5 @@ public class CartaDiCredito {
 				+ ", credito=" + credito + ", userC=" + userC + "]";
 	}
 
+	
 }
