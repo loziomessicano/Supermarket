@@ -37,7 +37,6 @@ public class User {
 
 	@JsonIgnore
 	@OneToMany
-	@JoinColumn(name="User_id")
 	List<CartaDiCredito> listaCarte;
 
 	@JsonIgnore

@@ -1,7 +1,5 @@
 package it.dstech.controller;
 
-import static org.assertj.core.api.Assertions.registerCustomDateFormat;
-
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +28,6 @@ import it.dstech.model.Categoria;
 import it.dstech.model.Ordine;
 import it.dstech.model.Prodotto;
 import it.dstech.model.User;
-import it.dstech.model.Prodotto;
 import it.dstech.service.CartaDiCreditoService;
 import it.dstech.service.OrdineService;
 import it.dstech.service.ProdottoService;
@@ -95,12 +92,14 @@ public class ProdottoController {
 			CartaDiCredito card = cartaDiCreditoService.findById(idCarta);
 			// Prodotto prodotto = prodottoService.findById(id);
 			Ordine ordine = new Ordine(); // da rivedere
+			
 			LocalDate dNow = LocalDate.now();
 			logger.info("anno" + dNow);
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yy");
 			String date = card.getScadenza();
 			YearMonth scadenzaMese = YearMonth.parse(date, formatter);
 			LocalDate scadenza = scadenzaMese.atEndOfMonth();
+			
 			if (dNow.isBefore(scadenza)) {
 				double costoTot = 0;
 				for (Prodotto lista : carello) {

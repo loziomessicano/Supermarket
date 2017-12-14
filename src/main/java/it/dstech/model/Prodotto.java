@@ -1,6 +1,5 @@
 package it.dstech.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -16,7 +15,7 @@ public class Prodotto {
 	private int id;
 	private String nome;
 	private String marca;
-	private LocalDate dataScadenza;
+	private String dataScadenza;
 	private Categoria categoria;
 	private Double quantitaDisponibile;
 	private Double quantitaDaAcquistare;
@@ -58,11 +57,11 @@ public class Prodotto {
 		this.marca = marca;
 	}
 
-	public LocalDate getDataScadenza() {
+	public String getDataScadenza() {
 		return dataScadenza;
 	}
 
-	public void setDataScadenza(LocalDate dataScadenza) {
+	public void setDataScadenza(String dataScadenza) {
 		this.dataScadenza = dataScadenza;
 	}
 

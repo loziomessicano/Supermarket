@@ -72,7 +72,7 @@ public class CartaDiCreditoController {
 			List<CartaDiCredito> find = (List<CartaDiCredito>) cartaService.findByUserId(id);
 			logger.info(find + " founded");
 			if(find!=null)
-			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.OK);
+			return new ResponseEntity<List<CartaDiCredito>>(find,HttpStatus.OK);
 			else
 			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception e) {
@@ -87,7 +87,7 @@ public class CartaDiCreditoController {
 			CartaDiCredito find = cartaService.findById(id);
 			logger.info(find + " founded");
 			if(find!=null)
-			return new ResponseEntity<CartaDiCredito>(HttpStatus.OK);
+			return new ResponseEntity<CartaDiCredito>(find,HttpStatus.OK);
 			else
 			return new ResponseEntity<CartaDiCredito>(HttpStatus.INTERNAL_SERVER_ERROR);
 		} catch (Exception e) {
