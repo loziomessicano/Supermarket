@@ -51,7 +51,7 @@ public class ProdottoController {
 	@Autowired
 	private OrdineService ordineService;
 
-	private Random random;
+	private Random random=new Random();
 
 	@GetMapping("/getmodel")
 	public ResponseEntity<Prodotto> getmodel() {
@@ -90,8 +90,6 @@ public class ProdottoController {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			User user = userService.findByUsername(auth.getName());
 			CartaDiCredito card = cartaDiCreditoService.findById(idCarta);
-			// Prodotto prodotto = prodottoService.findById(id);
-			Ordine ordine = new Ordine(); // da rivedere
 			
 			LocalDate dNow = LocalDate.now();
 			logger.info("anno" + dNow);
@@ -99,34 +97,49 @@ public class ProdottoController {
 			String date = card.getScadenza();
 			YearMonth scadenzaMese = YearMonth.parse(date, formatter);
 			LocalDate scadenza = scadenzaMese.atEndOfMonth();
+			Ordine ordine = new Ordine(); //da controllare
 			
 			if (dNow.isBefore(scadenza)) {
 				double costoTot = 0;
 				for (Prodotto lista : carello) {
 					costoTot = costoTot + lista.getPrezzoIvato();
 				}
+				 logger.info("Costo totale :"+costoTot);
 				if (card.getCredito() >= costoTot) {
 					logger.info("anno" + scadenza);
 					logger.info("prova" + dNow.isBefore(scadenza));
+					
 					for (Prodotto prodottoCarello : carello) {
+						logger.info(prodottoCarello+"");
 						if (prodottoCarello.getQuantitaDaAcquistare() <= prodottoCarello.getQuantitaDisponibile()
 								&& prodottoCarello.getQuantitaDisponibile() > 0) {
+							logger.info("sono nell'if");
+							
 							ordine.getListaProdotti().add(prodottoCarello);
-							prodottoCarello.setQuantitaDisponibile(prodottoCarello.getQuantitaDisponibile() - 1);
-							prodottoService.saveOrUpdate(prodottoCarello);
+						    logger.info("articolo aggiunto"+ordine.getListaProdotti());
+						    
+						    prodottoService.findById(prodottoCarello.getId()).setQuantitaDisponibile(prodottoCarello.getQuantitaDisponibile()-1);
+							prodottoService.saveOrUpdate(prodottoService.findById(prodottoCarello.getId()));
 							double credito = card.getCredito();
 							card.setCredito(credito - prodottoCarello.getPrezzoIvato());
-							cartaDiCreditoService.save(card);
 						
 						} else {
 							return new ResponseEntity<Prodotto>(HttpStatus.INTERNAL_SERVER_ERROR);
 						}
 					}
-				    userService.saveUser(user);
+					logger.info("sono fuori dal for");
+				    //userService.saveUser(user);
+				   
 				    cartaDiCreditoService.save(card);
+				    logger.info("carta saved");
 					ordine.setUser(user);
-					ordine.setNumeroTransazione(random.nextInt(1000) + 9000);
+				    logger.info("setUser saved");
+				    int numero=random.nextInt(10000);
+				    logger.info("numero random: "+numero);
+					ordine.setNumeroTransazione(numero);
+					logger.info("setNumeroTransazione saved");
 					ordine.setDataAcquisto(LocalDate.now());
+				    logger.info("setDataAcquisto saved");
 					ordineService.save(ordine);
 
 				} else {
