@@ -32,6 +32,26 @@ public class Prodotto {
 	public Prodotto() {
 
 	}
+	
+
+	public Prodotto(String nome, String marca, String dataScadenza, Categoria categoria, Double quantitaDisponibile,
+			Double quantitaDaAcquistare, Unita unita, Double prezzoUnitario, Double prezzoSenzaIva, Double prezzoIvato,
+			String img, int offerta) {
+		this.nome = nome;
+		this.marca = marca;
+		this.dataScadenza = dataScadenza;
+		this.categoria = categoria;
+		this.quantitaDisponibile = quantitaDisponibile;
+		this.quantitaDaAcquistare = quantitaDaAcquistare;
+		this.unita = unita;
+		this.prezzoUnitario = prezzoUnitario;
+		this.prezzoSenzaIva = prezzoSenzaIva;
+		this.prezzoIvato = prezzoIvato;
+		this.img = img;
+		this.offerta = offerta;
+	}
+
+
 
 	public int getId() {
 		return id;
