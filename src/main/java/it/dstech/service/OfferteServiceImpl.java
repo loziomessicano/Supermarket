@@ -5,11 +5,12 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import it.dstech.model.Offerte;
 import it.dstech.repository.OfferteRepository;
 
-@Entity
+@Service
 public class OfferteServiceImpl implements OfferteService {
 	
 	@Autowired

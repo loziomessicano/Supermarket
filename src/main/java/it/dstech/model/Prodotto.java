@@ -25,6 +25,7 @@ public class Prodotto {
 	private Double prezzoIvato;
 	private String img;
 	private int offerta;
+	private Double prezzoScontato;
 	
 	@ManyToMany(mappedBy="listaProdotti")
 	private List<Ordine> listaOrdini;
@@ -49,6 +50,7 @@ public class Prodotto {
 		this.prezzoIvato = prezzoIvato;
 		this.img = img;
 		this.offerta = offerta;
+		this.prezzoScontato=prezzoIvato-prezzoIvato*offerta/100;
 	}
 
 
@@ -156,6 +158,18 @@ public class Prodotto {
 	public void setOfferta(int offerta) {
 		this.offerta = offerta;
 	}
+	
+	
+
+	public Double getPrezzoScontato() {
+		return prezzoScontato;
+	}
+
+
+	public void setPrezzoScontato(Double prezzoScontato) {
+		this.prezzoScontato = prezzoScontato;
+	}
+
 
 	public List<Ordine> getListaOrdini() {
 		return listaOrdini;
@@ -165,14 +179,19 @@ public class Prodotto {
 		this.listaOrdini = listaOrdini;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Prodotto [id=" + id + ", nome=" + nome + ", marca=" + marca + ", dataScadenza=" + dataScadenza
 				+ ", categoria=" + categoria + ", quantitaDisponibile=" + quantitaDisponibile
 				+ ", quantitaDaAcquistare=" + quantitaDaAcquistare + ", unita=" + unita + ", prezzoUnitario="
 				+ prezzoUnitario + ", prezzoSenzaIva=" + prezzoSenzaIva + ", prezzoIvato=" + prezzoIvato + ", img="
-				+ img + ", offerta=" + offerta + ", listaOrdini=" + listaOrdini + "]";
+				+ img + ", offerta=" + offerta + ", prezzoScontato=" + prezzoScontato + ", listaOrdini=" + listaOrdini
+				+ "]";
 	}
+	
+	
+
 
 		
 }

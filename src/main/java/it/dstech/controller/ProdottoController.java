@@ -253,11 +253,13 @@ public class ProdottoController {
 	
 	
 	public void getOfferte() {
-		
+		LocalDate dataOggi = LocalDate.now();
+		logger.info(dataOggi + " data");
 			List<Prodotto> listaProdotti = prodottoService.findAll();
-			logger.info(listaProdotti.toString());
-			for(int i=0;i<listaProdotti.size();i++) {
-				
+			for (Prodotto prodotto : listaProdotti) {
+				prodottoService.findById(prodotto.getId()).setOfferta(0);
+				prodottoService.findById(prodotto.getId()).getPrezzoScontato();
+				prodottoService.saveOrUpdate(prodottoService.findById(prodotto.getId()));
 			}
 	
 		
