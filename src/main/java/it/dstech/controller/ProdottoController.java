@@ -71,6 +71,19 @@ public class ProdottoController {
 			return new ResponseEntity<List<Prodotto>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/findById/{id}")
+	public ResponseEntity<Prodotto> getProdById(@PathVariable("id") int id) {
+		
+		try {
+			logger.info("found");
+		    prodottoService.findById(id);
+		    return new ResponseEntity<Prodotto>(HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Error : " + e);
+			return new ResponseEntity<Prodotto>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 
 	@PostMapping("/saveOrUpdate")
 	public ResponseEntity<Prodotto> saveOrUpdate(@RequestBody Prodotto prodotto) {
@@ -238,19 +251,16 @@ public class ProdottoController {
 		}
 	}
 	
-	@GetMapping("/generaOfferte")
-	public ResponseEntity<List<Prodotto>> getOfferte() {
-		try {
+	
+	public void getOfferte() {
+		
 			List<Prodotto> listaProdotti = prodottoService.findAll();
 			logger.info(listaProdotti.toString());
 			for(int i=0;i<listaProdotti.size();i++) {
 				
 			}
-			return new ResponseEntity<List<Prodotto>>(listaProdotti, HttpStatus.OK);
-		} catch (Exception e) {
-			logger.error("Errore " + e);
-			return new ResponseEntity<List<Prodotto>>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
+	
+		
 		
 	}
 	
