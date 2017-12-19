@@ -25,11 +25,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import it.dstech.model.CartaDiCredito;
 import it.dstech.model.Categoria;
+import it.dstech.model.Offerte;
 import it.dstech.model.Ordine;
 import it.dstech.model.Prodotto;
 import it.dstech.model.Unita;
 import it.dstech.model.User;
 import it.dstech.service.CartaDiCreditoService;
+import it.dstech.service.OfferteService;
 import it.dstech.service.OrdineService;
 import it.dstech.service.ProdottoService;
 import it.dstech.service.UserService;
@@ -51,6 +53,10 @@ public class ProdottoController {
 	
 	@Autowired
 	private OrdineService ordineService;
+	
+	@Autowired
+	private OfferteService offerteService;
+
 
 	private Random random=new Random();
 
@@ -76,9 +82,9 @@ public class ProdottoController {
 	public ResponseEntity<Prodotto> getProdById(@PathVariable("id") int id) {
 		
 		try {
-			logger.info("found");
-		    prodottoService.findById(id);
-		    return new ResponseEntity<Prodotto>(HttpStatus.OK);
+		    Prodotto prod = prodottoService.findById(id);
+		    logger.info("found");
+		    return new ResponseEntity<Prodotto>(prod,HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Error : " + e);
 			return new ResponseEntity<Prodotto>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -254,14 +260,20 @@ public class ProdottoController {
 	
 	public void getOfferte() {
 		LocalDate dataOggi = LocalDate.now();
+		LocalDate dataOfferta;
 		logger.info(dataOggi + " data");
+		if (dataOfferta.isBefore(dataOggi)) {
+		    Offerte offerte = new Offerte();
+		    offerte.setDataOfferta(dataOggi);
 			List<Prodotto> listaProdotti = prodottoService.findAll();
 			for (Prodotto prodotto : listaProdotti) {
 				prodottoService.findById(prodotto.getId()).setOfferta(0);
 				prodottoService.findById(prodotto.getId()).getPrezzoScontato();
 				prodottoService.saveOrUpdate(prodottoService.findById(prodotto.getId()));
 			}
-	
+			listaProdotti = (List<Prodotto>) prodottoService.findByQuantitaDisponibile(0.0);
+			List<Prodotto> listaOfferte = new ArrayList();
+		}
 		
 		
 	}

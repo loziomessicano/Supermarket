@@ -14,6 +14,8 @@ public class Offerte {
 	private int id;
 	
 	private LocalDate dataOdierna;
+	
+	private LocalDate dataOfferta;
 
 	
 
@@ -36,11 +38,23 @@ public class Offerte {
 	public void setDataOdierna(LocalDate dataOdierna) {
 		this.dataOdierna = dataOdierna;
 	}
+	
+	
+
+	public LocalDate getDataOfferta() {
+		return dataOfferta;
+	}
+
+	public void setDataOfferta(LocalDate dataOfferta) {
+		this.dataOfferta = dataOfferta;
+	}
 
 	@Override
 	public String toString() {
-		return "Offerte [id=" + id + ", dataOdierna=" + dataOdierna + "]";
+		return "Offerte [id=" + id + ", dataOdierna=" + dataOdierna + ", dataOfferta=" + dataOfferta + "]";
 	}
+
+	
 	
 	
 
