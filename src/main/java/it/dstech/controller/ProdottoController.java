@@ -262,10 +262,12 @@ public class ProdottoController {
 		LocalDate dataOggi = LocalDate.now();
 		LocalDate dataOfferta;
 		logger.info(dataOggi + " data");
+		logger.info(dataOggi + " sono nell'if");
 		if (dataOfferta.isBefore(dataOggi)) {
 		    Offerte offerte = new Offerte();
 		    offerte.setDataOfferta(dataOggi);
 			List<Prodotto> listaProdotti = prodottoService.findAll();
+			logger.info(dataOggi + " entro nel for");
 			for (Prodotto prodotto : listaProdotti) {
 				prodottoService.findById(prodotto.getId()).setOfferta(0);
 				prodottoService.findById(prodotto.getId()).getPrezzoScontato();
