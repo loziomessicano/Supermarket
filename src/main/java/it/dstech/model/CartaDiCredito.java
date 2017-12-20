@@ -83,7 +83,7 @@ public class CartaDiCredito {
 	@Override
 	public String toString() {
 		return "CartaDiCredito [id=" + id + ", numero=" + numero + ", scadenza=" + scadenza + ", ccv=" + ccv
-				+ ", credito=" + credito + ", userC=" + userC + "]";
+				+ ", credito=" + credito + "]";
 	}
 
 	

@@ -154,6 +154,7 @@ public class ProdottoController {
 				    logger.info("carta saved");
 					ordine.setUser(user);
 				    logger.info("setUser saved");
+				    user.getListaOrdini().add(ordine);
 				    int numero=random.nextInt(10000);
 				    logger.info("numero random: "+numero);
 					ordine.setNumeroTransazione(numero);
@@ -258,27 +259,27 @@ public class ProdottoController {
 	}
 	
 	
-	public void getOfferte() {
-		LocalDate dataOggi = LocalDate.now();
-		LocalDate dataOfferta;
-		logger.info(dataOggi + " data");
-		logger.info(dataOggi + " sono nell'if");
-		if (dataOfferta.isBefore(dataOggi)) {
-		    Offerte offerte = new Offerte();
-		    offerte.setDataOfferta(dataOggi);
-			List<Prodotto> listaProdotti = prodottoService.findAll();
-			logger.info(dataOggi + " entro nel for");
-			for (Prodotto prodotto : listaProdotti) {
-				prodottoService.findById(prodotto.getId()).setOfferta(0);
-				prodottoService.findById(prodotto.getId()).getPrezzoScontato();
-				prodottoService.saveOrUpdate(prodottoService.findById(prodotto.getId()));
-			}
-			listaProdotti = (List<Prodotto>) prodottoService.findByQuantitaDisponibile(0.0);
-			List<Prodotto> listaOfferte = new ArrayList();
-		}
-		
-		
-	}
+//	public void getOfferte() {
+//		LocalDate dataOggi = LocalDate.now();
+//		LocalDate dataOfferta;
+//		logger.info(dataOggi + " data");
+//		logger.info(dataOggi + " sono nell'if");
+//		if (dataOfferta.isBefore(dataOggi)) {
+//		    Offerte offerte = new Offerte();
+//		    offerte.setDataOfferta(dataOggi);
+//			List<Prodotto> listaProdotti = prodottoService.findAll();
+//			logger.info(dataOggi + " entro nel for");
+//			for (Prodotto prodotto : listaProdotti) {
+//				prodottoService.findById(prodotto.getId()).setOfferta(0);
+//				prodottoService.findById(prodotto.getId()).getPrezzoScontato();
+//				prodottoService.saveOrUpdate(prodottoService.findById(prodotto.getId()));
+//			}
+//			listaProdotti = (List<Prodotto>) prodottoService.findByQuantitaDisponibile(0.0);
+//			List<Prodotto> listaOfferte = new ArrayList();
+//		}
+//		
+//		
+//	}
 	
 	
 	

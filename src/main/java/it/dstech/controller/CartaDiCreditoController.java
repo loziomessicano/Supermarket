@@ -52,7 +52,7 @@ public class CartaDiCreditoController {
 			String encoded = new String(encodedBytes);
 			carta.setNumero(encoded);
 			
-			
+			user.getListaCarte().add(carta);
 			carta.setUserC(user);
 			CartaDiCredito saved =cartaService.save(carta);
 			logger.info(saved + " saved");
