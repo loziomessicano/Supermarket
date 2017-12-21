@@ -179,16 +179,6 @@ public class Prodotto {
 		this.listaOrdini = listaOrdini;
 	}
 
-
-	@Override
-	public String toString() {
-		return "Prodotto [id=" + id + ", nome=" + nome + ", marca=" + marca + ", dataScadenza=" + dataScadenza
-				+ ", categoria=" + categoria + ", quantitaDisponibile=" + quantitaDisponibile
-				+ ", quantitaDaAcquistare=" + quantitaDaAcquistare + ", unita=" + unita + ", prezzoUnitario="
-				+ prezzoUnitario + ", prezzoSenzaIva=" + prezzoSenzaIva + ", prezzoIvato=" + prezzoIvato + ", img="
-				+ img + ", offerta=" + offerta + ", prezzoScontato=" + prezzoScontato + ", listaOrdini=" + listaOrdini
-				+ "]";
-	}
 	
 	
 

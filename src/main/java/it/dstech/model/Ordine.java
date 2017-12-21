@@ -74,11 +74,7 @@ public class Ordine {
 		this.listaProdotti = listaProdotti;
 	}
 
-	@Override
-	public String toString() {
-		return "Ordine [numeroTransazione=" + numeroTransazione + ", dataAcquisto=" + dataAcquisto + ", user=" + user
-				+ ", listaProdotti=" + listaProdotti + "]";
-	}
+
 
 	
 }

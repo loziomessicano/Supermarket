@@ -64,19 +64,36 @@ public class CartaDiCreditoController {
 		}
 	}
 	
-	@GetMapping("/findByUserId/{id}")
-	public ResponseEntity<List<CartaDiCredito>> findByUserId(@PathVariable int id) {
+//	@GetMapping("/findByUserId/{id}")
+//	public ResponseEntity<List<CartaDiCredito>> findByUserId(@PathVariable int id) {
+//		try {
+//			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//			User user = userService.findByUsername(auth.getName());
+//			List<CartaDiCredito> find = (List<CartaDiCredito>) cartaService.findByUserId(id);
+//			logger.info(find + " founded");
+//			if(find!=null)
+//			return new ResponseEntity<List<CartaDiCredito>>(find,HttpStatus.OK);
+//			else
+//			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		} catch (Exception e) {
+//			logger.error("Errore  " + e);
+//			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		}
+//	}
+	
+	@GetMapping("/getall")
+	public ResponseEntity<List<CartaDiCredito>> getAll() {
 		try {
+			
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			User user = userService.findByUsername(auth.getName());
-			List<CartaDiCredito> find = (List<CartaDiCredito>) cartaService.findByUserId(id);
-			logger.info(find + " founded");
-			if(find!=null)
-			return new ResponseEntity<List<CartaDiCredito>>(find,HttpStatus.OK);
-			else
-			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.info("aaaa"+auth.getName());
+			User user = userService.findByUsername(auth.getName());	
+			logger.info(user.toString());
+
+			List<CartaDiCredito> listaCard = cartaService.findByUserId(user.getId());
+			return new ResponseEntity<List<CartaDiCredito>>(listaCard, HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("Errore  " + e);
+			logger.info("a"+e);
 			return new ResponseEntity<List<CartaDiCredito>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
