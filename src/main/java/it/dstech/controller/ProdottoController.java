@@ -104,7 +104,7 @@ public class ProdottoController {
 	}
 
 	@PostMapping("/addprodotto/{idCarta}")
-	public ResponseEntity<Boolean> addProdotto(@RequestBody List<Prodotto> carello,
+	public ResponseEntity<Ordine> addProdotto(@RequestBody List<Prodotto> carello,
 			@PathVariable("idCarta") int idCarta) {
 		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -144,7 +144,7 @@ public class ProdottoController {
 							card.setCredito(credito - prodottoCarello.getPrezzoIvato());
 						
 						} else {
-							return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+							return new ResponseEntity<Ordine>(HttpStatus.INTERNAL_SERVER_ERROR);
 						}
 					}
 					logger.info("sono fuori dal for");
@@ -164,16 +164,16 @@ public class ProdottoController {
 					ordineService.save(ordine);
 
 				} else {
-					return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+					return new ResponseEntity<Ordine>(HttpStatus.INTERNAL_SERVER_ERROR);
 				}
 
 			} else {
-				return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+				return new ResponseEntity<Ordine>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-			return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+			return new ResponseEntity<Ordine>(ordine,HttpStatus.OK);
 		} catch (Exception e) {
 			logger.error("Errore " + e);
-			return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Ordine>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
 	}
