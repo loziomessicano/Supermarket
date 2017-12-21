@@ -36,8 +36,7 @@ public class Prodotto {
 	
 
 	public Prodotto(String nome, String marca, String dataScadenza, Categoria categoria, Double quantitaDisponibile,
-			Double quantitaDaAcquistare, Unita unita, Double prezzoUnitario, Double prezzoSenzaIva, Double prezzoIvato,
-			String img, int offerta) {
+			Double quantitaDaAcquistare, Unita unita, Double prezzoUnitario,String img, int offerta) {
 		this.nome = nome;
 		this.marca = marca;
 		this.dataScadenza = dataScadenza;
@@ -46,8 +45,8 @@ public class Prodotto {
 		this.quantitaDaAcquistare = quantitaDaAcquistare;
 		this.unita = unita;
 		this.prezzoUnitario = prezzoUnitario;
-		this.prezzoSenzaIva = prezzoSenzaIva;
-		this.prezzoIvato = prezzoIvato;
+		this.prezzoSenzaIva = prezzoIvato-prezzoIvato*22/100;
+		this.prezzoIvato = prezzoUnitario*quantitaDaAcquistare;
 		this.img = img;
 		this.offerta = offerta;
 		this.prezzoScontato=prezzoIvato-prezzoIvato*offerta/100;
