@@ -258,6 +258,22 @@ public class ProdottoController {
 		}
 	}
 	
+	@GetMapping("/getallordini")
+	public ResponseEntity<List<Ordine>> findAll() {
+		try {
+			
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			User user = userService.findByUsername(auth.getName());
+			
+			List<Ordine> listaOrdini = ordineService.findAll(user.getId()); 
+
+			logger.info(listaOrdini.toString());
+			return new ResponseEntity<List<Ordine>>(listaOrdini, HttpStatus.OK);
+		} catch (Exception e) {
+			logger.error("Errore " + e);
+			return new ResponseEntity<List<Ordine>>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 //	public void getOfferte() {
 //		LocalDate dataOggi = LocalDate.now();
